@@ -61,11 +61,26 @@ Route::middleware([
     // Superadmin routes
     Route::prefix('superadmin')->name('superadmin.')->middleware('superadmin')->group(function () {
         Route::get('/dashboard', [SuperadminDashboardController::class, 'index'])->name('dashboard');
+        Route::get('/todo', [SuperadminDashboardController::class, 'todo'])->name('todo');
+        Route::get('/add', [SuperadminDashboardController::class, 'add']);
+        Route::post('/add', [SuperadminDashboardController::class, 'store']);
+        Route::get('/show/{id}', [SuperadminDashboardController::class, 'show'])->name('show');
+        Route::get('todo/{id}', [SuperadminDashboardController::class, 'edit']);
+        Route::put('todo/{id}', [SuperadminDashboardController::class, 'update']);
+        Route::delete('todo/{id}', [SuperadminDashboardController::class, 'destroy']);
+
     })->middleware('superadmin');
 
     // Admin routes
     Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
-        Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+        Route::get('/todo', [AdminDashboardController::class, 'todo'])->name('todo');
+        Route::get('/add', [AdminDashboardController::class, 'add']);
+        Route::post('/add', [AdminDashboardController::class, 'store']);
+        Route::get('/show/{id}', [AdminDashboardController::class, 'show'])->name('show');
+        Route::get('todo/{id}', [AdminDashboardController::class, 'edit']);
+        Route::put('todo/{id}', [AdminDashboardController::class, 'update']);
+        Route::delete('todo/{id}', [AdminDashboardController::class, 'destroy']);
     })->middleware('admin');;
 
     // User routes

@@ -27,30 +27,45 @@
                 </tr>
             </thead>
             <tbody class="divide-y divide-blue-100">
-                @foreach ($data as $item)
+                <?php
+                $idUser = Auth::user()->id
+                ?>
+                    @foreach ($data as $item)
+                    @if ($item['tugas_untuk'] == $idUser)    
+                    <?php $counter = 1; ?>
                     <tr class="hover:bg-blue-50 transition duration-150">
                         <td class="py-3 px-4">
                             <a href="{{ url('user/show/'.$item['id']) }}">
-                            {{ $loop->iteration }}
+                              {{ $counter++ }}
                             </a>
                         </td>
-                    <td class="py-3 px-4 font-medium">{{ $item['tugas'] }}</td>
-                    <td class="py-3 px-4 text-blue-600">{{ $item['keterangan'] }}</td>
-                    <td class="py-3 px-4">{{ $item['tugas_dari'] }}</td>
-                    <td class="py-3 px-4">
-                        <div class="flex justify-center space-x-2">
-                            <button class="text-blue-500 hover:text-blue-700">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                            <button class="text-blue-500 hover:text-blue-700">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="text-red-500 hover:text-red-700">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
+                        <td class="py-3 px-4 font-medium">
+                            <a href="{{ url('user/show/'.$item['id']) }}">
+                                {{ $item['tugas'] }}</td>
+                            </a>
+                            <td class="py-3 px-4 text-blue-600">
+                            <a href="{{ url('user/show/'.$item['id']) }}">
+                            {{ $item['keterangan'] }}</td>
+                        </a>
+                        <td class="py-3 px-4">
+                            <a href="{{ url('user/show/'.$item['id']) }}">
+                            {{ $item['tugas_dari'] }}</td>
+                        </a>
+                        <td class="py-3 px-4">
+                            <div class="flex justify-center space-x-2">
+                                <button class="text-blue-500 hover:text-blue-700">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="text-blue-500 hover:text-blue-700">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="text-red-500 hover:text-red-700">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    @endif
                 @endforeach
             </tbody>
         </table>

@@ -15,8 +15,8 @@ return new class extends Migration
         Schema::create('todo', function (Blueprint $table) {
             $table->id();
             $table->string('tugas');
-            $table->date('waktu_mulai');
-            $table->date('waktu_selesai');
+            $table->dateTime('waktu_mulai');
+            $table->dateTime('waktu_selesai');
             $table->foreignId('tugas_dari')->constrained('users')->onDelete('cascade');
             $table->foreignId('tugas_untuk')->constrained('users')->onDelete('cascade');
             $table->string('keterangan');
